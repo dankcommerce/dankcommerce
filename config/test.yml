@@ -1,0 +1,9 @@
+db:
+  host: 'localhost'
+  username: 'postgres'
+  password: 'someDevelopmentStack'
+  database: 'dankcommerce_test'
+  synchronize: true
+
+jwt:
+  secret: 'topSecretString69'
