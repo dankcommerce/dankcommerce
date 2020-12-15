@@ -1,0 +1,15 @@
+server:
+  port: 3000
+
+explorer:
+  path: 'explorer'
+  title: 'BigCommerce Api Explorer'
+  description: 'The BigCommerce Api Explorer'
+
+db:
+  type: 'postgres'
+  port: 5432
+  database: 'dankcommerce'
+
+jwt:
+  expiresIn: 3600
