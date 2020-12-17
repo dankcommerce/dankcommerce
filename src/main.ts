@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ApplicationModule } from './application.module';
 import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as config from 'config';
@@ -9,7 +9,7 @@ async function bootstrap() {
   const logger = new Logger('boostrap');
 
   logger.log('Starting bootstrapping');
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(ApplicationModule);
 
   if (process.env.NODE_ENV === 'development') {
     app.enableCors();

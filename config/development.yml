@@ -6,3 +6,7 @@ db:
 
 jwt:
   secret: 'topSecretString69'
+
+master_access:
+  username: 'root'
+  key: 'dank'
