@@ -9,4 +9,4 @@ jwt:
 
 master_access:
   username: 'root'
-  key: 'dank'
+  password: 'SomeDankPassword1!'
