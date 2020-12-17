@@ -10,7 +10,6 @@ db:
   type: 'postgres'
   port: 5432
   database: 'dankcommerce'
-  keepConnectionAlive: true
 
 jwt:
   expiresIn: 3600
