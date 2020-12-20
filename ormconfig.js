@@ -8,9 +8,10 @@ module.exports = {
   username: process.env.RDB_USERNAME || dbConfig.username,
   password: process.env.RDB_PASSWORD || dbConfig.password,
   database: process.env.RDB_DB_NAME || dbConfig.database,
-  entities: [__dirname + '/src/../**/*.entity.{js,ts}'],
   synchronize: process.env.TYPEORM_SYNC || dbConfig.synchronize,
   cli: {
     migrationsDir: 'migrations',
   },
+  migrations: [__dirname + '/migrations/**/*.ts'],
+  entities: [__dirname + '/src/../**/*.entity.ts'],
 };

@@ -1,18 +1,26 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { AccessUserEntity } from '../src/authentication/entity/access-user.entity';
 import * as config from 'config';
+import { AccessUserAuthenticationDto } from '../src/authentication/dto/access-user-authentication.dto';
+import { AccessUserRepository } from '../src/authentication/repository/access-user.repository';
 
 export class SetupMasterAccessUser1608166915242 implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<void> {
+  private accessUserRepository = new AccessUserRepository();
+
+  public async up(): Promise<void> {
     const { username, password } = config.get('master_access');
 
-    const accessUser = new AccessUserEntity();
-    accessUser.username = username;
-    accessUser.salt = username;
-    // TODO: Make work
+    const accessUserAuthenticationDto = new AccessUserAuthenticationDto();
+    accessUserAuthenticationDto.username = username;
+    accessUserAuthenticationDto.password = password;
+
+    await this.accessUserRepository.createAccessUser(
+      accessUserAuthenticationDto,
+    );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    // TODO: Make work
+  public async down(): Promise<void> {
+    const { username } = config.get('master_access');
+
+    await this.accessUserRepository.delete({ username });
   }
 }
