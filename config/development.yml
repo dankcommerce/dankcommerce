@@ -4,6 +4,9 @@ db:
   password: 'someDevelopmentStack'
   synchronize: true
 
+elastic_search:
+  node: http://localhost:9200
+
 jwt:
   secret: 'topSecretString69'
 
