@@ -8,11 +8,13 @@ import { AccessUserService } from './service/access-user.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AuthenticationController } from './controller/authentication.controller';
 import { AccessUserController } from './controller/access-user.controller';
+import { LoggingModule } from '../logging/logging.module';
 
 const jwtConfig = config.get('jwt');
 
 @Module({
   imports: [
+    LoggingModule,
     TypeOrmModule.forFeature([AccessUserRepository]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({

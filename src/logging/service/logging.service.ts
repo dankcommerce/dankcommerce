@@ -32,7 +32,7 @@ export class LoggingService implements LoggerService {
   private callFunction(level: string, message: any, context?: string) {
     this.logger[level](message, context);
     this.elasticsearchService.index({
-      index: LoggingEnum.LOGGING,
+      index: `${LoggingEnum.LOGGING}-${level}`.toLowerCase(),
       body: {
         level,
         message: JSON.stringify(message),

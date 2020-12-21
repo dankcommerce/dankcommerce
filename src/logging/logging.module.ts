@@ -6,5 +6,6 @@ import { LoggingService } from './service/logging.service';
 @Module({
   imports: [ElasticsearchModule.register(elasticSearchConfig)],
   providers: [LoggingService],
+  exports: [LoggingService],
 })
 export class LoggingModule {}
