@@ -30,11 +30,12 @@ export class AccessUserRepository extends Repository<AccessUserEntity> {
   async createAccessUser(
     accessUserCreationDto: AccessUserCreationDto,
   ): Promise<void> {
-    const { username, password } = accessUserCreationDto;
+    const { username, password, role } = accessUserCreationDto;
 
     try {
       const user = new AccessUserEntity();
       user.username = username;
+      user.role = role;
       user.salt = await bcrypt.genSalt();
       user.password = await bcrypt.hash(password, user.salt);
       await user.save();
@@ -42,7 +43,7 @@ export class AccessUserRepository extends Repository<AccessUserEntity> {
     } catch (error) {
       const { code } = error;
       if (code === '23505') {
-        throw new ConflictException('User name already exists');
+        throw new ConflictException('Username already exists');
       } else {
         throw new InternalServerErrorException();
       }

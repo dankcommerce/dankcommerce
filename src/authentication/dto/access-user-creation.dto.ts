@@ -1,4 +1,5 @@
 import {
+  IsIn,
   IsLowercase,
   IsString,
   Matches,
@@ -6,6 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { RolesEnum } from '../enum/roles.enum';
 
 export class AccessUserCreationDto {
   @ApiProperty({
@@ -28,4 +30,10 @@ export class AccessUserCreationDto {
       'Password must contain one or more lower case character, one or more upper case characters and one or more numbers or special character',
   })
   password: string;
+
+  @ApiProperty({
+    default: RolesEnum.ADMIN,
+  })
+  @IsIn(Object.values(RolesEnum))
+  role: string;
 }

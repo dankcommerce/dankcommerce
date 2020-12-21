@@ -1,7 +1,8 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface } from 'typeorm';
 import * as config from 'config';
-import { AccessUserAuthenticationDto } from '../src/authentication/dto/access-user-authentication.dto';
 import { AccessUserRepository } from '../src/authentication/repository/access-user.repository';
+import { AccessUserCreationDto } from '../src/authentication/dto/access-user-creation.dto';
+import { RolesEnum } from '../src/authentication/enum/roles.enum';
 
 export class SetupMasterAccessUser1608166915242 implements MigrationInterface {
   private accessUserRepository = new AccessUserRepository();
@@ -9,13 +10,12 @@ export class SetupMasterAccessUser1608166915242 implements MigrationInterface {
   public async up(): Promise<void> {
     const { username, password } = config.get('master_access');
 
-    const accessUserAuthenticationDto = new AccessUserAuthenticationDto();
-    accessUserAuthenticationDto.username = username;
-    accessUserAuthenticationDto.password = password;
+    const accessUserCreationDto = new AccessUserCreationDto();
+    accessUserCreationDto.username = username;
+    accessUserCreationDto.role = RolesEnum.ROOT;
+    accessUserCreationDto.password = password;
 
-    await this.accessUserRepository.createAccessUser(
-      accessUserAuthenticationDto,
-    );
+    await this.accessUserRepository.createAccessUser(accessUserCreationDto);
   }
 
   public async down(): Promise<void> {

@@ -4,6 +4,6 @@ import { AccessUserEntity } from '../entity/access-user.entity';
 export const GetAccessUser = createParamDecorator(
   (data, ctx: ExecutionContext): AccessUserEntity => {
     const req = ctx.switchToHttp().getRequest();
-    return req.accessUser;
+    return req.user;
   },
 );
