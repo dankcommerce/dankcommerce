@@ -6,6 +6,8 @@ import { AccessUserAuthenticationDto } from '../dto/access-user-authentication.d
 import { JwtPayloadInterface } from '../interface/JwtPayloadInterface';
 import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
 import { LoggingService } from '../../logging/service/logging.service';
+import { AccessUserEntity } from '../entity/access-user.entity';
+import { RolesEnum } from '../enum/roles.enum';
 
 @Injectable()
 export class AccessUserService {
@@ -41,5 +43,13 @@ export class AccessUserService {
     return {
       accessToken,
     };
+  }
+
+  async getByUsername(username: string): Promise<AccessUserEntity> {
+    return await this.accessUserRepository.findOne({ username });
+  }
+
+  async countByRole(role: RolesEnum): Promise<number> {
+    return await this.accessUserRepository.count({ role });
   }
 }

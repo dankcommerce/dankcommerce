@@ -25,7 +25,7 @@ const jwtConfig = config.get('jwt');
     }),
   ],
   providers: [AccessUserService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule],
+  exports: [JwtStrategy, PassportModule, AccessUserService],
   controllers: [AuthenticationController, AccessUserController],
 })
 export class AuthenticationModule {}
