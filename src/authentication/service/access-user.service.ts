@@ -4,9 +4,10 @@ import { AccessUserRepository } from '../repository/access-user.repository';
 import { JwtService } from '@nestjs/jwt';
 import { AccessUserAuthenticationDto } from '../dto/access-user-authentication.dto';
 import { JwtPayloadInterface } from '../interface/JwtPayloadInterface';
+import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
 
 @Injectable()
-export class AuthenticationService {
+export class AccessUserService {
   private logger = new Logger('AuthenticationService');
 
   constructor(
@@ -16,11 +17,9 @@ export class AuthenticationService {
   ) {}
 
   createAccessUser(
-    accessUserAuthenticationDto: AccessUserAuthenticationDto,
+    accessUserCreationDto: AccessUserCreationDto,
   ): Promise<void> {
-    return this.accessUserRepository.createAccessUser(
-      accessUserAuthenticationDto,
-    );
+    return this.accessUserRepository.createAccessUser(accessUserCreationDto);
   }
 
   async getAccessToken(

@@ -7,6 +7,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
+import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
 
 @EntityRepository(AccessUserEntity)
 export class AccessUserRepository extends Repository<AccessUserEntity> {
@@ -27,9 +28,9 @@ export class AccessUserRepository extends Repository<AccessUserEntity> {
   }
 
   async createAccessUser(
-    accessUserAuthenticationDto: AccessUserAuthenticationDto,
+    accessUserCreationDto: AccessUserCreationDto,
   ): Promise<void> {
-    const { username, password } = accessUserAuthenticationDto;
+    const { username, password } = accessUserCreationDto;
 
     try {
       const user = new AccessUserEntity();
