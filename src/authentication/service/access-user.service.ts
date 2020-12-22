@@ -27,15 +27,14 @@ export class AccessUserService {
   async getAccessToken(
     accessUserAuthenticationDto: AccessUserAuthenticationDto,
   ): Promise<{ accessToken: string }> {
-    const username = await this.accessUserRepository.validateAccessUserPassword(
+    const payload: JwtPayloadInterface = await this.accessUserRepository.validateAccessUserPassword(
       accessUserAuthenticationDto,
     );
 
-    if (!username) {
+    if (!payload) {
       throw new UnauthorizedException('Invalid username or password');
     }
 
-    const payload: JwtPayloadInterface = { username };
     const accessToken = await this.jwtService.sign(payload);
     this.loggingService.debug(
       `Generated JWT token with payload ${JSON.stringify(payload)}`,

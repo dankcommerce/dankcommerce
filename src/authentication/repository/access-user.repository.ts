@@ -11,18 +11,14 @@ import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
 
 @EntityRepository(AccessUserEntity)
 export class AccessUserRepository extends Repository<AccessUserEntity> {
-  private logger = new Logger('AccessUserRepository');
-
   async validateAccessUserPassword(
     accessUserAuthenticationDto: AccessUserAuthenticationDto,
-  ): Promise<string> {
+  ): Promise<{ username: string; role: string }> {
     const { username, password } = accessUserAuthenticationDto;
     const accessUser = await this.findOne({ username });
     if (accessUser && (await accessUser.validatePassword(password))) {
-      this.logger.log(
-        `User with username ${username} successfully authenticated`,
-      );
-      return accessUser.username;
+      const { username, role } = accessUser;
+      return { username, role };
     }
     return null;
   }
@@ -39,7 +35,6 @@ export class AccessUserRepository extends Repository<AccessUserEntity> {
       user.salt = await bcrypt.genSalt();
       user.password = await bcrypt.hash(password, user.salt);
       await user.save();
-      this.logger.log(`User with username ${username} successfully created`);
     } catch (error) {
       const { code } = error;
       if (code === '23505') {

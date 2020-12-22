@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { LoggerService } from '@nestjs/common/services/logger.service';
-import { LoggingEnum } from '../enum/logging.enum';
+import { LoggingTypeEnum } from '../enum/logging-type.enum';
 
 @Injectable()
 export class LoggingService implements LoggerService {
@@ -32,7 +32,7 @@ export class LoggingService implements LoggerService {
   private callFunction(level: string, message: any, context?: string) {
     this.logger[level](message, context);
     this.elasticsearchService.index({
-      index: `${LoggingEnum.LOGGING}-${level}`.toLowerCase(),
+      index: `${LoggingTypeEnum.LOGGING}-${level}`.toLowerCase(),
       body: {
         level,
         message: JSON.stringify(message),

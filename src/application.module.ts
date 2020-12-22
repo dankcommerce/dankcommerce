@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { typeOrmConfig } from './config/typeorm.config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { LoggingModule } from './logging/logging.module';
 import { HealthModule } from './health/health.module';
+import { ConfigurationModule } from './configuration/configuration.module';
+import { DatabaseModule } from './database/database.module';
+import { ElasticsearchModule } from './elasticsearch/elasticsearch.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
+    ConfigurationModule,
+    DatabaseModule,
+    ElasticsearchModule,
     LoggingModule,
     AuthenticationModule,
     HealthModule,
