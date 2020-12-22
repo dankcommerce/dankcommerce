@@ -5,12 +5,14 @@ import { HealthModule } from './health/health.module';
 import { ConfigurationModule } from './configuration/configuration.module';
 import { DatabaseModule } from './database/database.module';
 import { ElasticsearchModule } from './elasticsearch/elasticsearch.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
     ConfigurationModule,
     DatabaseModule,
     ElasticsearchModule,
+    RedisModule,
     LoggingModule,
     AuthenticationModule,
     HealthModule,
