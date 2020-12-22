@@ -11,7 +11,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../guard/roles.guard';
 import { RolesEnum } from '../enum/roles.enum';
 import { Roles } from '../decorator/roles.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('access-user')
 @UseGuards(AuthGuard(), RolesGuard)
 export class AccessUserController {

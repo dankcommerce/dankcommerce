@@ -1,38 +1,56 @@
 version: '3.5'
 
 services:
+
   postgres:
-    container_name: postgres_container
     image: postgres
+    container_name: dank_postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-someDevelopmentStack}
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+      - dankdata_postgres:/data/postgres
     ports:
       - "5432:5432"
     networks:
-      - postgres
+      - danknet_postgres
     restart: unless-stopped
 
   pgadmin:
-    container_name: pgadmin_container
     image: dpage/pgadmin4
+    container_name: dank_pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_USERNAME: ${PGADMIN_DEFAULT_USERNAME:-admin}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@pgadmin.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
-      - pgadmin:/root/.pgadmin
+      - dankdata_pgadmin:/root/.pgadmin
     ports:
       - "${PGADMIN_PORT:-3001}:80"
     networks:
-      - postgres
+      - danknet_postgres
     restart: unless-stopped
+
+  redis:
+    image: redis
+    container_name: dank_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - danknet_redis
+
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: dank_redisinsight
+    ports:
+      - "${REDISINSIGHT_PORT:-3003}:8001"
+    networks:
+      - danknet_redis
 
   elasticsearch01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
-    container_name: elasticsearch01
+    container_name: dank_elasticsearch01
     environment:
       - node.name=elasticsearch01
       - cluster.name=es-docker-cluster
@@ -45,15 +63,15 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - elasticsearch01:/usr/share/elasticsearch/data
+      - dankdata_elasticsearch01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
-      - elasticsearch
+      - danknet_elasticsearch
 
   elasticsearch02:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
-    container_name: elasticsearch02
+    container_name: dank_elasticsearch02
     environment:
       - node.name=elasticsearch02
       - cluster.name=es-docker-cluster
@@ -66,13 +84,13 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - elasticsearch02:/usr/share/elasticsearch/data
+      - dankdata_elasticsearch02:/usr/share/elasticsearch/data
     networks:
-      - elasticsearch
+      - danknet_elasticsearch
 
   elasticsearch03:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
-    container_name: elasticsearch03
+    container_name: dank_elasticsearch03
     environment:
       - node.name=elasticsearch03
       - cluster.name=es-docker-cluster
@@ -85,30 +103,32 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - elasticsearch03:/usr/share/elasticsearch/data
+      - dankdata_elasticsearch03:/usr/share/elasticsearch/data
     networks:
-      - elasticsearch
+      - danknet_elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.10.1
-    container_name: kibana
+    container_name: dank_kibana
     environment:
       ELASTICSEARCH_URL: http://elasticsearch01:9200
       ELASTICSEARCH_HOSTS: http://elasticsearch01:9200
     ports:
-      - '${PGADMIN_PORT:-3002}:5601'
+      - '${KIBANA_PORT:-3002}:5601'
     networks:
-      - elasticsearch
+      - danknet_elasticsearch
 
 networks:
-  postgres:
+  danknet_postgres:
     driver: bridge
-  elasticsearch:
+  danknet_elasticsearch:
+    driver: bridge
+  danknet_redis:
     driver: bridge
 
 volumes:
-  postgres:
-  pgadmin:
-  elasticsearch01:
-  elasticsearch02:
-  elasticsearch03:
+  dankdata_postgres:
+  dankdata_pgadmin:
+  dankdata_elasticsearch01:
+  dankdata_elasticsearch02:
+  dankdata_elasticsearch03:

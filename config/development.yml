@@ -7,6 +7,9 @@ db:
 elastic_search:
   node: http://localhost:9200
 
+redis:
+  host: localhost
+
 jwt:
   secret: 'topSecretString69'
 
