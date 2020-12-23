@@ -16,6 +16,12 @@
     "migration:run": "ts-node ./node_modules/typeorm/cli.js --config ./ormconfig.js migration:run",
     "migration:drop": "ts-node ./node_modules/typeorm/cli.js --config ./ormconfig.js schema:drop",
     "migration:refresh": "npm run migration:drop && npm run migration:run",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "NODE_ENV=test jest --config ./test/jest-e2e.json",
     "generate-library": "npm-run-all generate-library:*",
     "generate-library:csharp": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g csharp -o ./dist-client/csharp_api_client",
     "generate-library:elm": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g elm -o ./dist-client/elm_api_client",
@@ -28,13 +34,7 @@
     "generate-library:rust": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g rust -o ./dist-client/rust_api_client",
     "generate-library:lua": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g lua -o ./dist-client/lua_api_client",
     "generate-library:r": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g r -o ./dist-client/r_api_client",
-    "generate-library:ts-node": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g typescript-node -o ./dist-client/ts-node_api_client",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "NODE_ENV=test jest --config ./test/jest-e2e.json"
+    "generate-library:ts-node": "openapi-generator-cli generate -i http://localhost:3000/explorer-json -g typescript-node -o ./dist-client/ts-node_api_client"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.10.0",

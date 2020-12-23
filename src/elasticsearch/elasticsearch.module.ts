@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import {
   ElasticsearchModule as ElasticSearchModule,
   ElasticsearchModuleOptions,
-  ElasticsearchService,
 } from '@nestjs/elasticsearch';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -15,7 +14,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     }),
   ],
-  providers: [ElasticsearchService],
-  exports: [ElasticsearchService],
+  exports: [ElasticsearchModule],
 })
 export class ElasticsearchModule {}

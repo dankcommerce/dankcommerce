@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { LoggingService } from './service/logging.service';
-import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { ElasticsearchModule } from '../elasticsearch/elasticsearch.module';
 
 @Module({
-  imports: [ElasticsearchService],
-  providers: [ElasticsearchService, LoggingService],
+  imports: [ElasticsearchModule],
+  providers: [LoggingService],
   exports: [LoggingService],
 })
 export class LoggingModule {}
