@@ -1,3 +1,4 @@
 export enum ElasticSearchIndexEnum {
-  HEALTH_LOG = 'health_log',
+  HEALTH_LOG = 'health-log',
+  GENERIC_LOG = 'generic-log',
 }
