@@ -1,15 +1,15 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { Roles } from '../../authentication/decorator/roles.decorator';
-import { RolesEnum } from '../../authentication/enum/roles.enum';
+import { Roles } from '../../../api/authentication/decorator/roles.decorator';
+import { RolesEnum } from '../../../api/authentication/enum/roles.enum';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../../authentication/guard/roles.guard';
+import { RolesGuard } from '../../../api/authentication/guard/roles.guard';
 import {
   DNSHealthIndicator,
   HealthCheckService,
   MemoryHealthIndicator,
   TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
-import { AccessUserHealthIndicator } from '../../authentication/health/access-user.health';
+import { AccessUserHealthIndicator } from '../../../api/authentication/health/access-user.health';
 import { HealthLogService } from '../service/health-log.service';
 
 @Controller('health')

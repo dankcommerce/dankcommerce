@@ -18,7 +18,7 @@ export default () => {
     username: process.env.RDB_USERNAME || username,
     password: process.env.RDB_PASSWORD || password,
     database: process.env.RDB_DB_NAME || database,
-    entities: [__dirname + '/../../**/*.entity.{js,ts}'],
+    entities: [__dirname + '/../../../**/*.entity.{js,ts}'],
     synchronize: process.env.TYPEORM_SYNC || synchronize,
   };
   return { typeorm };

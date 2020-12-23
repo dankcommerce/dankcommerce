@@ -5,7 +5,6 @@ import * as bcrypt from 'bcrypt';
 import {
   ConflictException,
   InternalServerErrorException,
-  Logger,
 } from '@nestjs/common';
 import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
 

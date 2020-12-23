@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { LoggingService } from './service/logging.service';
-import { ElasticsearchModule } from '../elasticsearch/elasticsearch.module';
+import { ElasticsearchModule } from '../../core/elasticsearch/elasticsearch.module';
 
 @Module({
   imports: [ElasticsearchModule],

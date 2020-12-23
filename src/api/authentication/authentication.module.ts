@@ -8,7 +8,7 @@ import { AccessUserService } from './service/access-user.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AuthenticationController } from './controller/authentication.controller';
 import { AccessUserController } from './controller/access-user.controller';
-import { LoggingModule } from '../logging/logging.module';
+import { LoggingModule } from '../../utility/logging/logging.module';
 
 const jwtConfig = config.get('jwt');
 

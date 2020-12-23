@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { LoggerService } from '@nestjs/common/services/logger.service';
-import { ElasticSearchIndexEnum } from '../../elasticsearch/enum/elastic-search-index.enum';
+import { ElasticSearchIndexEnum } from '../../../core/elasticsearch/enum/elastic-search-index.enum';
 
 @Injectable()
 export class LoggingService implements LoggerService {

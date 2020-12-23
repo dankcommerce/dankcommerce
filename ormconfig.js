@@ -12,6 +12,6 @@ module.exports = {
   cli: {
     migrationsDir: 'migrations',
   },
-  migrations: [__dirname + '/migrations/**/*.ts'],
-  entities: [__dirname + '/src/../**/*.entity.ts'],
+  migrations: [__dirname + '/migrations/**/**/*.ts'],
+  entities: [__dirname + '/src/../**/**/*.entity.ts'],
 };

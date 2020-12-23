@@ -1,8 +1,8 @@
 import { MigrationInterface } from 'typeorm';
 import * as config from 'config';
-import { AccessUserRepository } from '../src/authentication/repository/access-user.repository';
-import { AccessUserCreationDto } from '../src/authentication/dto/access-user-creation.dto';
-import { RolesEnum } from '../src/authentication/enum/roles.enum';
+import { AccessUserRepository } from '../src/api/authentication/repository/access-user.repository';
+import { AccessUserCreationDto } from '../src/api/authentication/dto/access-user-creation.dto';
+import { RolesEnum } from '../src/api/authentication/enum/roles.enum';
 
 export class SetupMasterAccessUser1608166915242 implements MigrationInterface {
   private accessUserRepository = new AccessUserRepository();

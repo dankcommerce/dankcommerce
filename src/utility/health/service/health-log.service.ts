@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { ElasticSearchIndexEnum } from '../../elasticsearch/enum/elastic-search-index.enum';
+import { ElasticSearchIndexEnum } from '../../../core/elasticsearch/enum/elastic-search-index.enum';
 
 @Injectable()
 export class HealthLogService {
@@ -9,7 +9,10 @@ export class HealthLogService {
   log(results: Record<string, any>) {
     this.elasticsearchService.index({
       index: ElasticSearchIndexEnum.HEALTH_LOG,
-      body: results,
+      body: {
+        ...results,
+        timestamp: new Date().getTime(),
+      },
     });
   }
 }

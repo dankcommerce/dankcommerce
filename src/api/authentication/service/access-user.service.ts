@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AccessUserAuthenticationDto } from '../dto/access-user-authentication.dto';
 import { JwtPayloadInterface } from '../interface/JwtPayloadInterface';
 import { AccessUserCreationDto } from '../dto/access-user-creation.dto';
-import { LoggingService } from '../../logging/service/logging.service';
+import { LoggingService } from '../../../utility/logging/service/logging.service';
 import { AccessUserEntity } from '../entity/access-user.entity';
 import { RolesEnum } from '../enum/roles.enum';
 
